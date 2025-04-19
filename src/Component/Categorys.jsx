@@ -1,27 +1,6 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
 import CategoriCard from "./CategoriCard";
 
-const Categorys = () => {
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    categoriData();
-  }, []);
-
-  const categoriData = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/cetegories");
-      const data = response.data;
-      setCategories(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  
-
+const Categorys = ({ categories }) => {
   return (
     <div className="mt-[100px] my-8 px-4 space-y-2">
       <h1 className="text-center text-main font-lato text-xl md:text-2xl font-bold">

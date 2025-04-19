@@ -3,6 +3,9 @@ import Root from "../Layout/Root";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import SignIn from "../Pages/SignUp";
+import AllProducts from "../Pages/AllProducts";
+import CategorywiseProducts from "../Pages/CategorywiseProducts";
+import ProductDetails from "../Pages/ProductDetails";
 
 const Router = createBrowserRouter([
   {
@@ -20,6 +23,18 @@ const Router = createBrowserRouter([
       {
         path: "/sign-up",
         element: <SignIn></SignIn>,
+      },
+      {
+        path: "/products",
+        element: <AllProducts></AllProducts>,
+      },
+      {
+        path: "/products/:category",
+        element: <CategorywiseProducts></CategorywiseProducts>,
+      },
+      {
+        path: "/products/details/:id",
+        element: <ProductDetails></ProductDetails>,
       },
     ],
   },
