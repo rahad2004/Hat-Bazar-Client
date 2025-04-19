@@ -4,7 +4,7 @@ import { Link } from "react-router";
 const CategoriCard = ({ categori }) => {
   const { name, image, description } = categori;
   return (
-    <Link to={`/products/${name.toLowerCase()}`}>
+    <Link to={`/products/${name}`}>
       <div className="relative shadow-2xl rounded-2xl overflow-hidden">
         <img className="h-[240px] w-full object-cover" src={image} alt={name} />
 

@@ -6,11 +6,15 @@ import SignIn from "../Pages/SignUp";
 import AllProducts from "../Pages/AllProducts";
 import CategorywiseProducts from "../Pages/CategorywiseProducts";
 import ProductDetails from "../Pages/ProductDetails";
+import AddProduct from "../Pages/AddProduct";
+import Errorpage from "../Pages/Errorpage";
+import MyAddproduct from "../Pages/MyAddproduct";
 
 const Router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <Errorpage></Errorpage>,
     children: [
       {
         path: "/",
@@ -27,6 +31,14 @@ const Router = createBrowserRouter([
       {
         path: "/products",
         element: <AllProducts></AllProducts>,
+      },
+      {
+        path: "/add-product",
+        element: <AddProduct></AddProduct>,
+      },
+      {
+        path: "/my-add-product",
+        element: <MyAddproduct></MyAddproduct>,
       },
       {
         path: "/products/:category",

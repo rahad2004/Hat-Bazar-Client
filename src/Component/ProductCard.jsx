@@ -2,7 +2,6 @@ import { TbCurrencyTaka } from "react-icons/tb";
 import { Link } from "react-router";
 
 const ProductCard = ({ product }) => {
-  console.log(product);
   const {
     unit,
     stock,

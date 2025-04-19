@@ -75,10 +75,10 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <div>My Posted Jobs</div>
+                <Link to={"/add-product"}>Add Product</Link>
               </li>
               <li>
-                <div>My Bids</div>
+               <Link to={'/my-add-product'}>My Add Products</Link>
               </li>
               <li>
                 <div>Bid Requests</div>
