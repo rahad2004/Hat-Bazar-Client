@@ -36,8 +36,6 @@ const AddProduct = () => {
           confirmButtonText: "Ok",
         });
       }
-
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
