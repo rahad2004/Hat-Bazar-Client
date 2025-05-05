@@ -9,6 +9,7 @@ import ProductDetails from "../Pages/ProductDetails";
 import AddProduct from "../Pages/AddProduct";
 import Errorpage from "../Pages/Errorpage";
 import MyAddproduct from "../Pages/MyAddproduct";
+import UpdateProduct from "../Pages/UpdateProduct";
 
 const Router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const Router = createBrowserRouter([
       {
         path: "/products/details/:id",
         element: <ProductDetails></ProductDetails>,
+      },
+      {
+        path: "/products/update/:id",
+        element: <UpdateProduct />,
       },
     ],
   },

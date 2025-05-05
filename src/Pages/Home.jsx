@@ -14,7 +14,7 @@ const Home = () => {
 
   const categoriData = async () => {
     try {
-      const response = await axios.get("https://hat-bazar-server.onrender.com/cetegories");
+      const response = await axios.get("http://localhost:5000/cetegories");
       const data = response.data;
       setCategories(data);
       setLoading(false);

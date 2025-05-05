@@ -2,9 +2,13 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import banner from "../assets/All Product  Banner.JPG";
-import useAuth from "../Hooks/useAuth";
+import { useParams } from "react-router";
+import { useEffect, useState } from "react";
 
-const AddProduct = () => {
+const UpdateProduct = () => {
+  const { id } = useParams();
+  const [product, setProduct] = useState({});
+
   const {
     register,
     handleSubmit,
@@ -12,36 +16,28 @@ const AddProduct = () => {
     formState: { errors },
   } = useForm();
 
-  const { user } = useAuth();
-  const email = user.email;
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(
+        `http://localhost:5000/products/details/${id}`
+      );
+      const data = await response.data;
+      setProduct(data);
+      reset({
+        name: data.name || "",
+        image: data.image || "",
+        price: data.price || 0,
+        unit: data.unit || "",
+        stock: data.stock || 0,
+        category: data.category || "",
+        description: data.description || "",
+      });
+    };
+    fetchData();
+  }, [id, reset]);
 
   const onSubmit = async (data) => {
-    const updatedata = { ...data, createAt: new Date(), email };
-
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/add-product",
-        {
-          updatedata,
-        }
-      );
-
-      const data = await response.data;
-
-      if (data.insertedId) {
-        Swal.fire({
-          title: "Sussess",
-          text: `Product add successfully`,
-          icon: "success",
-          confirmButtonText: "Ok",
-        });
-      }
-
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-
+    console.log(data);
     reset();
   };
   return (
@@ -55,7 +51,7 @@ const AddProduct = () => {
               clipPath: "polygon(15% 0, 85% 0, 100% 100%, 0% 100%)",
             }}
           >
-            Add Product
+            Update Product
           </h1>
         </div>
       </div>
@@ -66,7 +62,7 @@ const AddProduct = () => {
         >
           <div>
             <input
-              {...register("name", { required: "This Field is Required" })}
+              {...register("name")}
               placeholder="Product Name"
               className="w-full px-4 py-2 bg-[#ffffff] outline-none rounded"
               type="text"
@@ -81,7 +77,7 @@ const AddProduct = () => {
 
           <div>
             <input
-              {...register("image", { required: "This Field is Required" })}
+              {...register("image")}
               placeholder="Image URL"
               className="w-full px-4 py-2 outline-none rounded bg-[#ffffff]"
               type="text"
@@ -96,7 +92,6 @@ const AddProduct = () => {
           <div>
             <input
               {...register("price", {
-                required: "This Field is Required",
                 valueAsNumber: true,
                 min: { value: 1, message: "Price must be at least 1" },
               })}
@@ -113,7 +108,7 @@ const AddProduct = () => {
 
           <div>
             <input
-              {...register("unit", { required: "This Field is Required" })}
+              {...register("unit")}
               placeholder="Unit (e.g. kg, liter)"
               className="w-full px-4 py-2 bg-[#ffffff] outline-none rounded"
               type="text"
@@ -128,7 +123,6 @@ const AddProduct = () => {
           <div>
             <input
               {...register("stock", {
-                required: "This Field is Required",
                 valueAsNumber: true,
                 min: { value: 1, message: "Price must be at least 1" },
               })}
@@ -144,10 +138,10 @@ const AddProduct = () => {
           </div>
           <div>
             <select
-              {...register("category", { required: "This Field is Required" })}
+              {...register("category")}
               className="w-full px-4 py-2 bg-[#ffffff] outline-none rounded"
             >
-              <option value="">Select Category</option>
+              <option value="">ss</option>
               <option value="Vegetable">Vegetable</option>
               <option value="Meat">Meat</option>
               <option value="Milk">Milk</option>
@@ -183,7 +177,7 @@ const AddProduct = () => {
             type="submit"
             className="bg-main text-white px-6 py-2 rounded hover:bg-green-600 md:col-span-2"
           >
-            Add Product
+            Update Product
           </button>
         </form>
       </div>
@@ -191,4 +185,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default UpdateProduct;

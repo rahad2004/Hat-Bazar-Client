@@ -13,7 +13,7 @@ const CategorywiseProducts = () => {
 
   const loadProduct = async () => {
     const response = await axios.get(
-      `https://hat-bazar-server.onrender.com/products/${category}`
+      `http://localhost:5000/products/${category}`
     );
 
     const data = response.data;

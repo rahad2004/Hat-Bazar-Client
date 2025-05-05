@@ -8,7 +8,7 @@ const AllProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setloading] = useState(true);
   const loadProduct = async () => {
-    const response = await axios.get("https://hat-bazar-server.onrender.com/products");
+    const response = await axios.get("http://localhost:5000/products");
 
     const data = response.data;
     setProducts(data);

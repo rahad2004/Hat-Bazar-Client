@@ -16,7 +16,7 @@ const banners = [
   },
   {
     title: "Pure Cow Milk – Healthy Choice",
-    image: "https://thumbs.dreamstime.com/b/farm-milk-banner-ads-splashing-liquid-green-grassland-d-illustration-141918652.jpg",
+    image: "https://i.pinimg.com/736x/ed/86/a8/ed86a8008f408dfa45687c420dfef7ec.jpg",
     category: "Milk",
   },
 ];

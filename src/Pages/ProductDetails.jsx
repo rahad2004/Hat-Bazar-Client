@@ -11,7 +11,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`https://hat-bazar-server.onrender.com/products/details/${id}`)
+      .get(`http://localhost:5000/products/details/${id}`)
       .then((res) => {
         setProduct(res.data);
         setLoading(false);
