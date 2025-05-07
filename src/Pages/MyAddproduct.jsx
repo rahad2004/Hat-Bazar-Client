@@ -14,7 +14,10 @@ const MyAddproduct = () => {
   const loadProduct = async () => {
     try {
       const response = await axios(
-        `http://localhost:5000/myadd-products/${email}`
+        `http://localhost:5000/myadd-products/${email}`,
+        {
+          withCredentials: true,
+        }
       );
       const data = await response.data;
       setProducts(data);

@@ -13,7 +13,7 @@ const AddProduct = () => {
   } = useForm();
 
   const { user } = useAuth();
-  const email = user.email;
+  const email = user?.email;
 
   const onSubmit = async (data) => {
     const updatedata = { ...data, createAt: new Date(), email };
@@ -23,7 +23,8 @@ const AddProduct = () => {
         "http://localhost:5000/add-product",
         {
           updatedata,
-        }
+        },
+        { withCredentials: true }
       );
 
       const data = await response.data;
