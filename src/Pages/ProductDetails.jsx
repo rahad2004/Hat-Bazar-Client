@@ -3,33 +3,42 @@ import React, { useEffect, useState } from "react";
 import { TbCurrencyTaka } from "react-icons/tb";
 import { useParams } from "react-router";
 import Loader from "../Local/Loader";
+import useAxiosSecure from "../Hooks/useAxiosSucure";
+import { useQuery } from "@tanstack/react-query";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const AxiosSecure = useAxiosSecure();
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/products/details/${id}`)
-      .then((res) => {
-        setProduct(res.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching product details:", error);
-        setLoading(false);
-      });
-  }, [id]);
+  const loadProductDetails = async () => {
+    const res = await AxiosSecure.get(`products/details/${id}`);
 
-  if (loading) return <Loader></Loader>;
-  if (!product)
-    return (
-      <div className="text-center py-20 text-red-500">Product not found.</div>
-    );
+    return res.data;
+  };
+
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["singelProduct"],
+    queryFn: loadProductDetails,
+  });
+
+  // useEffect(() => {
+  //   AxiosSecure.get(`products/details/${id}`)
+  //     .then((res) => {
+  //       setProduct(res.data);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching product details:", error);
+  //       setLoading(false);
+  //     });
+  // }, [id]);
+
+  if (isLoading) return <Loader></Loader>;
+  if (isError) return <p>{error.message}</p>;
+
 
   const { name, image, price, unit, stock, rating, category, description } =
-    product;
+    data;
 
   return (
     <div className=" min-h-[calc(100vh-292px)] flex items-center px-4 py-8 max-w-5xl mx-auto ">

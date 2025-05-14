@@ -3,8 +3,10 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import banner from "../assets/All Product  Banner.JPG";
 import useAuth from "../Hooks/useAuth";
+import useAxiosSucure from "../Hooks/useAxiosSucure";
 
 const AddProduct = () => {
+  const AxiosSucure = useAxiosSucure();
   const {
     register,
     handleSubmit,
@@ -19,13 +21,9 @@ const AddProduct = () => {
     const updatedata = { ...data, createAt: new Date(), email };
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/add-product",
-        {
-          updatedata,
-        },
-        { withCredentials: true }
-      );
+      const response = await AxiosSucure.post("add-product", {
+        updatedata,
+      });
 
       const data = await response.data;
 
